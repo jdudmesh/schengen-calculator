@@ -29,6 +29,8 @@ import { LoginDialog } from "../components/loginDialog";
 
 import styles from '../styles/Home.module.css'
 
+import { useMediaQuery } from "react-responsive";
+
 import {
     FirebaseAuthConsumer,
 } from "@react-firebase/auth";
@@ -40,9 +42,16 @@ export default function Home(props) {
     ReactGA.initialize('G-6LHZTNJPFD');
     ReactGA.pageview('/');
 
+    const isWidth800 = useMediaQuery({ query: "(min-width: 800px)" });
+
+    const [isNarrowWindow, setIsNarrowWindow] = useState(true);
     const [openHelpDialog, setOpenHelpDialog] = useState(false);
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(['agree-terms']);
+
+    useEffect(() => {
+        setIsNarrowWindow(!isWidth800);
+    }, [isWidth800]);
 
     useEffect(() => {
         if(!cookies["agree-terms"]) {
@@ -75,19 +84,24 @@ export default function Home(props) {
         {({ isSignedIn, user, providerId }) => {
             return <>
                 <Head>
-                    <title>Schengen Viss Free Stay Calculator</title>
+                    <title>Schengen Visa-Free Stay Calculator</title>
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                     <meta name="keywords" content="schengen,visa,calculator,eu" />
                     <meta name="author" content="John Dudmesh" />
-                    <meta name="description" content="Visa Free Schengen Stay Calculator" />
+                    <meta name="description" content="Visa-Free Schengen Stay Calculator" />
                     <meta charSet="UTF-8" />
                 </Head>
 
                 <div>
                     <AppBar className={styles.appBar}>
-                        <Typography variant="h6">Schengen Calculator - Plan your stay in the Schengen Area</Typography>
+
+                        { isNarrowWindow
+                            ? <Typography variant="h6" className={styles.headngText}>Schengen Calculator</Typography>
+                            : <Typography variant="h6" className={styles.headngText}>Schengen Calculator - Plan your stay in the Schengen Area</Typography>
+                        }
+
                         <div className={styles.grow}></div>
                         <div className={styles.appBarButtons}>
                             <Tooltip title="Help"><IconButton color="inherit" edge="end" onClick={onHelp}><HelpOutline></HelpOutline></IconButton></Tooltip>

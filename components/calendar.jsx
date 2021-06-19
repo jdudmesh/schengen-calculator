@@ -12,7 +12,11 @@ import moment, { months } from 'moment';
 
 import styles from './calendar.module.scss'
 
+import { useMediaQuery } from "react-responsive";
+
 export function Calendar({ user }) {
+
+    const isWidth800 = useMediaQuery({ query: "(min-width: 800px)" });
 
     let debounceTimer = useRef();
     let debounceWindow = useRef();
@@ -21,12 +25,16 @@ export function Calendar({ user }) {
     const oneDay = 86400;
     const sixMonths = oneDay * 180;
 
+    const [isNarrowWindow, setIsNarrowWindow] = useState(true);
     const [doneInitialFetch, setDoneInitialFetch] = useState(false);
     const [dateList, setDateList] = useState([]);
     const [dayCount, setDayCounts] = useState([]);
     const [currentDate, setCurrentDate] = useState(today.clone());
     const [pageDate, setPageDate] = useState(today.clone().startOf("month").startOf("week"));
 
+    useEffect(() => {
+        setIsNarrowWindow(!isWidth800);
+    }, [isWidth800]);
 
     useEffect(() => {
 
@@ -74,9 +82,8 @@ export function Calendar({ user }) {
                 clearTimeout(debounceTimer.current);
                 debounceTimer.current = null;
             }
-            console.log("down", debounceWindow.current);
+
             debounceTimer.current = setTimeout(() => {
-                console.log("debounce");
                 debounceWindow.current = false;
                 debounceTimer.current = null;
             }, 500);
@@ -100,7 +107,6 @@ export function Calendar({ user }) {
         }
 
         if (buttons === 1) {
-            console.log("move", debounceWindow.current);
             let dateKey = day.unix();
             if (dateList.indexOf(dateKey) < 0) {
                 dateList.push(dateKey);
@@ -112,7 +118,6 @@ export function Calendar({ user }) {
     }
 
     const onMouseUp = (day, buttons) => {
-        console.log("up", buttons);
         if (buttons === 0) {
         }
     }
@@ -172,11 +177,11 @@ export function Calendar({ user }) {
                     }
 
                     return (<div className={dayStyleList.join(" ")} key={iy} onClick={() => onClickDay(day)} onMouseMove={(ev) => onMouseMove(day, ev.buttons, ev)} onMouseDown={(ev) => onMouseDown(day, ev.buttons)} onMouseUp={(ev) => onMouseUp(day, ev.buttons)}>
+                        <div className={bodyStyleList.join(" ")}></div>
                         <div className={styles.dayHeader}>
                             <div className={dayNumStyleList.join(" ")}><span>{day.format("D")}</span></div>
                         </div>
                         <div className={styles.dayBody}>
-                            <div className={bodyStyleList.join(" ")}></div>
                             <div className={styles.daysText}>{count > 0 ? count : ""}</div>
                         </div>
                     </div>)
@@ -201,7 +206,7 @@ export function Calendar({ user }) {
 
     return <div className={styles.calendar}>
         <div className={styles.toolbar}>
-            <div className={styles.buttonBar}>
+            <div className={styles.buttonBarNav}>
                 <Button
                     variant="contained"
                     color="primary"
@@ -220,15 +225,17 @@ export function Calendar({ user }) {
                     startIcon={<ArrowForward></ArrowForward>}
                     onClick={onNavigateNext}
                 >Next</Button>
+            </div>
+            <div className={styles.buttonBarNav2}>
                 <Button
                     variant="contained"
                     color="secondary"
                     startIcon={<Delete></Delete>}
                     onClick={onNavigateClear}
                 >Clear All</Button>
-            </div>
-            <div className={styles.currentDateDisplay}>
-                {currentDate.format("MMMM YYYY")}
+                <div className={styles.currentDateDisplay}>
+                    {currentDate.format("MMMM YYYY")}
+                </div>
             </div>
         </div>
         <div>
