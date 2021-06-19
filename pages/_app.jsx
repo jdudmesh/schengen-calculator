@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
     return <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
         <Component {...pageProps} />
     </FirebaseAuthProvider>
-
 }
 
 export default MyApp

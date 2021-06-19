@@ -35,4 +35,3 @@ yarn-error.log*
 
 lambda/python
 SchengenCalculatorLayer.zip
-firebaseConfig.js
