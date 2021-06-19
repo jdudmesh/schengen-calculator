@@ -1,0 +1,168 @@
+$color-red-fg: #842029;
+$color-red-bg:#f8d7da;
+$color-red-border:#f5c2c7;
+$color-green-fg: #0f5132;
+$color-green-bg: #d1e7dd;
+;
+$color-green-border: #badbcc;
+$color-eu-blue: #003399;
+$color-eu-yellow: #ffcc00;
+.calendar {
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+    // border-radius: 10px;
+    // border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.calendarHeader {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    // border-top: 1px solid #ddd;
+    // border-left: 1px solid #ddd;
+    // border-right: 1px solid #ddd;
+}
+
+.dayName {
+    flex: 1 0;
+    padding: 2px;
+    border-radius: 5px;
+    background-color: #ddd;
+    margin: 5px;
+    padding: 2px;
+}
+
+.calendarBody {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex: 1 0 0; // postcss will remove the 0px here hence the duplication below
+    flex-basis: 0px;
+    overflow: hidden;
+    height: 100%; // ie-fix
+    //border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+.week {
+    display: flex;
+    flex-direction: row;
+    flex: 1 0;
+    //border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+.day {
+    height: calc(100vw / 15);
+    flex: 1 0;
+    border-right: 1px solid #ddd;
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    &:last-child {
+        border: none;
+    }
+}
+
+.dayHeader {
+    height: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dayNum {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.today {
+    border: 1px solid;
+}
+
+.daysText {
+    position: absolute;
+    color: black;
+    opacity: 0.35;
+    font-size: 18px;
+    z-index: 100;
+    right: 10px;
+    bottom: 0px;
+    font-style: italic;
+    text-align: right;
+}
+
+.dayBody {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 18px);
+    vertical-align: middle;
+}
+
+.inEU {
+    position: absolute;
+    flex: 0;
+    margin-top: 10px;
+    width: calc(100vw / 30);
+    height: calc(100vw / 30);
+    border-radius: 5px;
+    text-align: center;
+    background-image: url("../europe-flag.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #003399;
+}
+
+.overstay {
+    color: $color-red-fg;
+    background-color: $color-red-bg;
+    border: 1px solid $color-red-border;
+}
+
+.understay {
+    color: $color-green-fg;
+    background-color: $color-green-bg;
+    border: 1px solid $color-green-border;
+}
+
+button.nav {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    border-color: $color-red-border;
+    background-color: $color-red-bg;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttonBar>button {
+    margin-right: 5px;
+}
+
+.currentDateDisplay {
+    padding: 5px;
+    font-size: 18px;
+}

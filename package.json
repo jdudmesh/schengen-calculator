@@ -1,0 +1,27 @@
+{
+    "name": "schengen-calculator",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.2",
+        "@material-ui/icons": "^4.11.2",
+        "@react-firebase/auth": "^0.2.10",
+        "@react-firebase/database": "^0.3.11",
+        "axios": "^0.21.1",
+        "bootstrap": "^4.5.3",
+        "firebase": "^8.6.3",
+        "moment": "^2.29.1",
+        "next": "10.0.5",
+        "react": "17.0.1",
+        "react-cookie": "^4.0.3",
+        "react-dom": "17.0.1",
+        "react-ga": "^3.3.0",
+        "react-toastify": "^6.2.0",
+        "sass": "^1.32.4"
+    }
+}

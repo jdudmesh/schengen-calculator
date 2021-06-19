@@ -1,0 +1,52 @@
+swagger: "2.0"
+info:
+  description: "Schengen Calculator API"
+  version: "1.0.0"
+  title: "Schengen Calculator API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api.visafreecalculator.eu"
+basePath: "/v1"
+schemes:
+- "https"
+- "http"
+paths:
+  /calendar:
+    post:
+      summary: "Save calendar entries"
+      description: ""
+      operationId: "saveCalendar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Calendar entries"
+        required: true
+        schema:
+          $ref: "#/definitions/ArrayOfString"
+      responses:
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Invalid input"
+    get:
+      summary: "Get calendar entires"
+      description: ""
+      operationId: "getCalendar"
+      produces:
+      - "application/json"
+      responses:
+        "403":
+          description: "Forbidden"
+definitions:
+  ArrayOfString:
+    type: array
+    items:
+      type: string
